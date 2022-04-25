@@ -132,4 +132,3 @@ class RadioTest {
         assertEquals(99, radio.getSoundVolume());
     }
 }
-
