@@ -1,66 +1,75 @@
 package ru.netology.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Radio {
     private int currentRadioStation;
     private int soundVolume;
+    private int minRadioStation = 0;
+    private int maxRadioStation = 9;
+    private int minSoundVolume = 0;
+    private int maxSoundVolume = 100;
 
-    public int getCurrentRadioStation() {
-        return currentRadioStation;
+    public Radio(int numberOfRadioStations) {
+
+        this.maxRadioStation = numberOfRadioStations - 1;
     }
 
+
     public void nextRadioStation() {
-        if (currentRadioStation >= 9) {
-            currentRadioStation = 0;
+        if (currentRadioStation >= maxRadioStation) {
+            currentRadioStation = minRadioStation;
         } else {
             currentRadioStation = currentRadioStation + 1;
         }
     }
 
     public void prevRadioStation() {
-        if (currentRadioStation == 0) {
-            currentRadioStation = 9;
+        if (currentRadioStation == minRadioStation) {
+            currentRadioStation = maxRadioStation;
         } else {
             currentRadioStation = currentRadioStation - 1;
         }
     }
 
     public void setCurrentRadioStation(int currentRadioStation) {
-        if (currentRadioStation < 0) {
+        if (currentRadioStation < minRadioStation) {
             return;
         }
-        if (currentRadioStation > 9) {
+        if (currentRadioStation > maxRadioStation) {
             return;
         }
         this.currentRadioStation = currentRadioStation;
 
     }
 
-    public int getSoundVolume() {
-        return soundVolume;
-    }
-
     public void increaseSoundVolume() {
-        if (soundVolume >= 10) {
-            soundVolume = 10;
+        if (soundVolume >= maxSoundVolume) {
+            soundVolume = maxSoundVolume;
         } else {
             soundVolume = soundVolume + 1;
         }
     }
 
     public void decreaseSoundVolume() {
-        if (soundVolume <= 0) {
-            soundVolume = 0;
+        if (soundVolume <= minSoundVolume) {
+            soundVolume = minSoundVolume;
         } else {
             soundVolume = soundVolume - 1;
         }
     }
 
     public void setSoundVolume(int soundVolume) {
-        if (soundVolume < 0) {
+        if (soundVolume < minSoundVolume) {
             return;
         }
-        if (soundVolume > 10) {
-            soundVolume = 10;
+        if (soundVolume > maxSoundVolume) {
+            soundVolume = maxSoundVolume;
         }
         this.soundVolume = soundVolume;
 
